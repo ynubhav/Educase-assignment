@@ -1,0 +1,11 @@
+node_modules
+.env
+
+# SSL certificates
+*.pem
+*.crt
+*.key
+
+# Or specific ones
+cert.pem
+key.pem

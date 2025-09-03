@@ -16,8 +16,8 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: {
-    ca: fs.readFileSync(path.join(__dirname, "../ca.pem")), // rootdir/ca.pem
-  },
+  ca: process.env.DB_SSL_CERT.replace(/\\n/g, "\n"),
+},
 });
 
 export { pool };

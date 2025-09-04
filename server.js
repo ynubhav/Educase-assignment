@@ -8,6 +8,16 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// catching malformed json body
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({
+      success: false,
+      message: "Malformed JSON in request body",
+    });
+  }
+});
+
 //initialize the database and create tables if not exist
 await initDB().catch((err) => {
   console.error("DB init failed:", err);
